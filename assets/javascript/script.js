@@ -12,21 +12,44 @@ function generatePassword() {
   password = "";
   characters = "";
 
-  if(passwordItems)
+  if(passwordItems.lowerCase){
+    characters += lowerCase;
+    console.log(characters);
+  }
+  if(passwordItems.upperCase) {
+    characters += upperCase;
+  }
+  if(passwordItems.symbols) {
+    characters += symbols;
+  }
+  if(passwordItems.numbers) {
+    characters += numbers;
+  }
+
+  for (var i = 0; i < passwordItems.characters; i++) {
+   password += characters.charAt(Math.round(Math.random() * characters.length));
+  }
+  console.log(password);
+  return password;
 }
 
 function passwordContent() {
   passwordItems.characters = prompt("How many characters do you want in the password?");
   
-  if(passwordItems.characters < 8 || passwordItems.characters === null) {
-    alert("Must be at least 8 characters, try again.")
-    passwordContent();
-  } else {
+  if(passwordItems.characters >= 8) {
     passwordItems.lowerCase = confirm("Do you want lowercase letters?");
     passwordItems.upperCase = confirm("Do you want uppercase letters?");
     passwordItems.numbers = confirm("Do you want numbers?");
-    passwordItems.specialCharacters = confirm("Do you want special characters?");
+    passwordItems.symbols = confirm("Do you want special characters?");
+  } else {
+    alert("Must be at lease 8 characters. Try again.")
+    passwordContent();
   }
+
+  if (passwordItems.lowerCase === false && passwordItems.upperCase === false && passwordItems.numbers === false && passwordItems.symbols === false) {
+    alert("Password must have some content.");
+    passwordContent();
+  } 
 }
 
 // Write password to the #password input
