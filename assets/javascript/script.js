@@ -36,13 +36,13 @@ function generatePassword() {
 function passwordContent() {
   passwordItems.characters = prompt("How many characters do you want in the password?");
   
-  if(passwordItems.characters >= 8) {
+  if(passwordItems.characters >= 8 && passwordItems.characters <= 128) {
     passwordItems.lowerCase = confirm("Do you want lowercase letters?");
     passwordItems.upperCase = confirm("Do you want uppercase letters?");
     passwordItems.numbers = confirm("Do you want numbers?");
     passwordItems.symbols = confirm("Do you want special characters?");
   } else {
-    alert("Must be at lease 8 characters. Try again.")
+    alert("Length must be from 8 - 128. Try again.")
     passwordContent();
   }
 
